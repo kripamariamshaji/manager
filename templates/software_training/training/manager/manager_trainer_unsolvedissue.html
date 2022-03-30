@@ -74,7 +74,7 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form method="post" action="/softwareapp/savetmreplaytrnr/{{i.id}}">
+                <form method="post" action="{% url 'savetmreplaytrnr' i.id %}">
                     {% csrf_token %}
                     <textarea class="col-12 grid-margin stretch-card text-light" style="background-color: rgba(66, 65, 65, 0.267)" rows="6" name="review"></textarea>
             </div>

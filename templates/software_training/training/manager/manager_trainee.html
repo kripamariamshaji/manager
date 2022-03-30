@@ -26,16 +26,6 @@
                                 <th> End Date </th>
                             </tr>
                         </thead>
-                        {% comment %} <tbody>{% if tre %} {% for t in tre %}
-                            <tr data-href="{% url 'Manager_trainees_details' t.id %}">
-                                <td><img src=" {{t.photo.url}} " alt="image " /> &nbsp;{{t.fullname}}</td>
-                                <td> {{t.department.department}} </td>
-                                <td>{{t.startdate|date:"d-m-Y"}}</td>
-                                <td>{{t.enddate|date:"d-m-Y"}}</td>
-                            </tr>
-                            {% endfor %}{% else %}
-                            <h5>Nothing to display...</h5>
-                            {% endif %} {% endcomment %}
                             {% for t in tre %}
                             <tr data-href="{% url 'Manager_trainees_details' t.id %}">
                                 <td><img src="{{t.photo.url}}" alt="image" />&nbsp;{{t.fullname}}</td>

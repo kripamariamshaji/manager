@@ -78,8 +78,6 @@
             </div>
         </div>
     </div>
-    <!--details ends here -->
-
     <!-- pie chart and bar chart starts here -->
     <div class="page-header">
         <h3 class="page-title"> Chart </h3>
@@ -152,13 +150,9 @@
               day = '0' + day.toString();
           var maxDate = year + '-' + month + '-' + day;
           document.getElementById("txtDate").setAttribute("max", maxDate);
-          document.getElementById("txtDate1").setAttribute("max", maxDate);
-          
-                  
-                  
+          document.getElementById("txtDate1").setAttribute("max", maxDate);   
     </script>
     <script>
-
         var config = {
           type: 'pie',
           data: {
@@ -183,7 +177,6 @@
         };
   
       </script>
-
 <script>
 
         
@@ -211,7 +204,5 @@
         }
        }
     });
-    
-          </script>
-
-    {% endblock %}
+</script>
+{% endblock %}

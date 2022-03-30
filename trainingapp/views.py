@@ -158,37 +158,182 @@ def manager_team(request, id):
         d = user_registration.objects.get(id=id)
         return render(request, 'software_training/training/manager/manager_team.html', {'d': d, 'mem': mem})
 
-    return redirect('login')
+    return redirect('/')
 
-def manager_current_team(request):
-    return render(request,'software_training/training/manager/manager_current_team.html')
-
-def Manager_current_task(request):
-    return render(request,'software_training/training/manager/manager_current_task.html')
-
-def manager_current_assigned(request):
-    return render(request,'software_training/training/manager/manager_current_assigned.html')
-
-def manager_current_trainees(request):
-    return render(request,'software_training/training/manager/manager_current_trainees.html')
-
-def manager_current_empdetails(request):
-    return render(request,'software_training/training/manager/manager_current_empdetails.html')
-
-def manager_current_attendance(request):
-    return render(request,'software_training/training/manager/manager_current_attendance.html')
-
-def manager_current_attendance_list(request):
-    return render(request,'software_training/training/manager/manager_current_attendance_list.html')
-
-def manager_current_task_list(request):
-    return render(request,'software_training/training/manager/manager_current_task_list.html')
-
-def manager_current_task_details(request):
-    return render(request,'software_training/training/manager/manager_current_task_details.html')
+def manager_current_team(request, id):
+    if 'm_id' in request.session:
+        if request.session.has_key('m_designation_id'):
+            m_designation_id = request.session['m_designation_id']
+        if request.session.has_key('m_fullname'):
+            m_fullname = request.session['m_fullname']
+        else:
+            m_fullname = "dummy"
     
-def manager_previous_team(request):
-    return render(request,'software_training/training/manager/manager_previous_team.html')
+        mem = user_registration.objects.filter(designation_id=m_designation_id) .filter(fullname=m_fullname)
+        d = user_registration.objects.get(id=id)
+        tm = create_team.objects.filter(create_team_trainer=d.fullname).filter(create_team_status=0).order_by('-id')
+        des = designation.objects.get(designation_name='trainer')
+        cut = user_registration.objects.filter(designation_id=des.id)
+        vars = user_registration.objects.filter(designation_id=m_designation_id).filter(fullname=m_fullname)
+        return render(request, 'software_training/training/manager/manager_current_team.html', {'vars': vars, 'des': des, 'tm': tm, 'cut': cut, 'mem': mem})
+    else:
+        return redirect('/')
+
+def Manager_current_task(request, id):
+    if 'm_id' in request.session:
+        if request.session.has_key('m_id'):
+            m_id = request.session['m_id']
+        mem = user_registration.objects.filter(id=m_id)
+        d = create_team.objects.get(id=id)
+        return render(request,'software_training/training/manager/manager_current_task.html',{'d': d, 'mem': mem})
+    else:
+        return redirect('/')
+
+def manager_current_assigned(request, id):
+    if 'm_id' in request.session:
+        if request.session.has_key('m_designation_id'):
+            m_designation_id = request.session['m_designation_id']
+        if request.session.has_key('m_fullname'):
+            m_fullname = request.session['m_fullname']
+        else:
+            m_fullname = "dummy"
+    
+        mem = user_registration.objects.filter(designation_id=m_designation_id) .filter(fullname=m_fullname)
+        d = create_team.objects.get(id=id)
+        vars = topic.objects.filter(topic_team_id=d.id).order_by('-id')
+        return render(request, 'software_training/training/manager/manager_current_assigned.html', {'vars': vars, 'mem': mem})
+
+    else:
+        return redirect('/')
+    
+def manager_current_trainees(request, id):
+    if 'm_id' in request.session:
+        if request.session.has_key('m_designation_id'):
+            m_designation_id = request.session['m_designation_id']
+        if request.session.has_key('m_fullname'):
+            m_fullname = request.session['m_fullname']
+        else:
+            m_fullname = "dummy"
+    
+        mem = user_registration.objects.filter(designation_id=m_designation_id) .filter(fullname=m_fullname)
+        d = create_team.objects.get(id=id)
+        des = designation.objects.get(designation_name='trainee')
+        vars = user_registration.objects.filter(team=d.id,designation_id=des.id).order_by('-id')
+    
+        return render(request, 'software_training/training/manager/manager_current_trainees.html', {'vars': vars, 'mem': mem})
+    else:
+        return redirect('/')
+
+def manager_current_empdetails(request, id):
+    if 'm_id' in request.session:
+        if request.session.has_key('m_designation_id'):
+            m_designation_id = request.session['m_designation_id']
+        if request.session.has_key('m_fullname'):
+            m_fullname = request.session['m_fullname']
+        else:
+            m_fullname = "dummy"
+    
+        mem = user_registration.objects.filter(designation_id=m_designation_id) .filter(fullname=m_fullname)
+        vars = user_registration.objects.get(id=id)
+        tre = create_team.objects.get(id=vars.team_id)
+        labels = []
+        data = []
+        queryset = user_registration.objects.filter(id=vars.id)
+        for i in queryset:
+            labels=[i.workperformance,i.attitude,i.creativity]
+            
+            
+            data=[i.workperformance,i.attitude,i.creativity]
+    
+        return render(request, 'software_training/training/manager/manager_current_empdetails.html', {'vars': vars, 'tre': tre, 'mem': mem ,'labels': labels,'data': data})
+    else:
+        return redirect('/')
+
+def manager_current_attendance(request,id):
+    if 'm_id' in request.session:
+        if request.session.has_key('m_designation_id'):
+            m_designation_id = request.session['m_designation_id']
+        if request.session.has_key('m_fullname'):
+            m_fullname = request.session['m_fullname']
+        else:
+            m_fullname = "dummy"
+    
+        mem = user_registration.objects.filter(designation_id=m_designation_id) .filter(fullname=m_fullname)
+        vars = user_registration.objects.get(id=id)
+    
+        return render(request, 'software_training/training/manager/manager_current_attendance.html', {'vars':vars,'mem': mem})
+    else:
+        return redirect('/')
+
+def manager_current_attendance_list(request,id):
+    if 'm_id' in request.session:
+        if request.session.has_key('m_designation_id'):
+            m_designation_id = request.session['m_designation_id']
+        if request.session.has_key('m_fullname'):
+            m_fullname = request.session['m_fullname']
+        else:
+            m_fullname = "dummy"
+        mem = user_registration.objects.filter(designation_id=m_designation_id) .filter(fullname=m_fullname)
+        vars = user_registration.objects.get(id=id)
+        if request.method == 'POST':
+            std = request.POST['startdate']
+            edd = request.POST['enddate']
+            user=vars
+            atten = attendance.objects.filter(attendance_date__gte=std,attendance_date__lte=edd,attendance_user_id=user)
+        return render(request,'software_training/training/manager/manager_current_attendance_list.html',{'mem':mem,'vars': vars, 'atten':atten})
+    else:
+        return redirect('/')
+
+def manager_current_task_list(request, id):
+    if 'm_id' in request.session:
+        if request.session.has_key('m_designation_id'):
+            m_designation_id = request.session['m_designation_id']
+        if request.session.has_key('m_fullname'):
+            m_fullname = request.session['m_fullname']
+        else:
+            m_fullname = "dummy"
+        mem = user_registration.objects.filter(designation_id=m_designation_id) .filter(fullname=m_fullname)
+        d = user_registration.objects.get(id=id)
+        tsk = trainer_task.objects.filter(trainer_task_user_id=d.id).order_by('-id')
+    
+        return render(request, 'software_training/training/manager/manager_current_task_list.html', {'tsk': tsk, 'mem': mem})
+
+    else:
+        return redirect('/')
+    
+def manager_current_task_details(request, id):
+    if 'm_id' in request.session:
+        if request.session.has_key('m_designation_id'):
+            m_designation_id = request.session['m_designation_id']
+        if request.session.has_key('m_fullname'):
+            m_fullname = request.session['m_fullname']
+        else:
+            m_fullname = "dummy"
+        mem = user_registration.objects.filter(designation_id=m_designation_id) .filter(fullname=m_fullname)
+        d = user_registration.objects.get(id=id)
+        tsk = trainer_task.objects.get(id=d.id)
+        return render(request, 'software_training/training/manager/manager_current_task_details.html', {'tsk': tsk, 'mem': mem})
+    else:
+        return redirect('/')
+
+def manager_previous_team(request, id):
+    if 'm_id' in request.session:
+        if request.session.has_key('m_designation_id'):
+            m_designation_id = request.session['m_designation_id']
+        if request.session.has_key('m_fullname'):
+            m_fullname = request.session['m_fullname']
+        else:
+            m_fullname = "dummy"
+    
+        mem = user_registration.objects.filter(designation_id=m_designation_id) .filter(fullname=m_fullname)
+        d = user_registration.objects.get(id=id)
+        tm = create_team.objects.filter(create_team_trainer = d.fullname).filter(create_team_status = '1')
+        des = designation.objects.get(designation_name='trainer')
+        cut = user_registration.objects.filter(designation_id=des.id)
+        vars = user_registration.objects.filter(designation_id=m_designation_id).filter(fullname=m_fullname)
+        return render(request, 'software_training/training/manager/manager_previous_team.html', {'vars': vars, 'des': des, 'tm': tm, 'cut': cut, 'mem': mem})
+    else:
+        return redirect('/')
 
 def Manager_previous_task(request):
     return render(request,'software_training/training/manager/Manager_previous_task.html')
@@ -453,26 +598,41 @@ def manager_report_issue(request):
             m_fullname = "dummy"
     
         mem = user_registration.objects.filter(designation_id=m_designation_id) .filter(fullname=m_fullname)
-        des = designation.objects.get(designation_name='manager')
-        des1 = designation.objects.get(designation_name='trainingmanager')
+        des = designation.objects.get(designation_name='Admin')
+        des1 = designation.objects.get(designation_name='manager')
         ree = user_registration.objects.get(designation_id=des.id)
         if request.method == 'POST':
             vars = reported_issue()
-            vars.issue = request.POST['issue']
-            vars.issuestatus = 0
-            vars.reporter_id = usernametm2
-            vars.designation_id = des1.id
-            vars.reported_to = ree
-            vars.reported_date = datetime.now()
+            vars.reported_issue_issue = request.POST['issue']
+            vars.reported_issue_issuestatus = 0
+            vars.reported_issue_reporter_id = m_id
+            vars.reported_issue_designation_id_id = des1.id
+            vars.reported_issue_reported_to = ree
+            vars.reported_issue_reported_date = datetime.now()
             vars.save()
-            return redirect('reportedissue')
-        return render(request, 'reportissue.html', {'mem': mem})
+            return redirect('Manager_reported_issues')
+        return render(request, 'software_training/training/manager/manager_report_issue.html', {'mem': mem})
     else:
         return redirect('/')
-    return render(request,'software_training/training/manager/manager_report_issue.html')
 
 def manager_reported_issue(request):
-    return render(request,'software_training/training/manager/manager_reported_issue.html')
+    if 'm_id' in request.session:
+        if request.session.has_key('m_designation_id'):
+            m_designation_id = request.session['m_designation_id']
+        if request.session.has_key('m_fullname'):
+            m_fullname = request.session['m_fullname']
+        if request.session.has_key('m_id'):
+            m_id = request.session['m_id']
+        else:
+            m_fullname = "dummy"
+    
+        mem = user_registration.objects.filter(designation_id=m_designation_id) .filter(fullname=m_fullname)
+     
+        cut = reported_issue.objects.filter(reported_issue_reporter=m_id).order_by('-id')
+        context = {'cut': cut, 'vars': vars, 'mem': mem}
+        return render(request,'software_training/training/manager/manager_reported_issue.html', context)
+    else:
+        return redirect('/')
 
 def Manager_attendance(request):
     return render(request,'software_training/training/manager/manager_attendance.html') 

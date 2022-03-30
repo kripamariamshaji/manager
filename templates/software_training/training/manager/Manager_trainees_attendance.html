@@ -31,6 +31,8 @@
                             <tr data-href="#">
 
                                 <th> Date </th>
+                                <th> Login Time </th>
+                                <th> Logout Time </th>
                                 <th> Status </th>
                             </tr>
                         </thead>
@@ -38,7 +40,8 @@
                             {% if atten %} {% for i in atten %}
                             <tr data-href="#">
                                 <td> {{i.attendance_date|date:"d-m-Y"}}</td>
-                                
+                                <td></td>
+                                <td></td>
                                 <td>
                                     {% if i.attendance_status == '1' %}
                                     <div class="badge badge-outline-success">Present</div>

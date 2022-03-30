@@ -43,7 +43,7 @@
                             </thead>
                             <tbody>
                                 {% if vars %} {% for t in vars %}
-                                <tr data-href="/softwareapp/manager_team/{{t.id}}">
+                                <tr data-href="{% url 'manager_team' t.id %}">
                                     <td>
                                         <img src="{{t.photo.url}}" alt="image" />
                                         <span class="ps-2">{{t.fullname}}</span>

@@ -4,7 +4,7 @@
 
 <div class="row" style="padding-top:20px;">
     <div class="col-sm-6 grid-margin">
-        <a href="{%url 'manager_current_assigned'%} " style="text-decoration:none;">
+        <a href="{% url 'manager_current_assigned' d.id %} " style="text-decoration:none;">
             <div class="card" style="height: 180px ">
                 <div class="card-body">
                     <div class="row" style="padding-top:20px;">
@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="col-sm-6 grid-margin ">
-        <a href="{%url 'manager_current_trainees'%}" style="text-decoration:none; ">
+        <a href="{% url 'manager_current_trainees' d.id %}" style="text-decoration:none; ">
             <div class="card " style="height: 180px ">
                 <div class="card-body ">
 

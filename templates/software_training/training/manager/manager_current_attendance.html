@@ -23,7 +23,7 @@
         </center>
       <br><br>
         
-        <form class="forms-sample" action="{% url 'manager_current_attendance_list'%}" method="post">
+        <form class="forms-sample" action="{% url 'manager_current_attendance_list' vars.id%}" method="post">
             {% csrf_token   %}
             <div class="form-group row">
               <label for="exampleInputEmail2" class="col-4 col-sm-4 col-md-4 col-lg-4 col-form-label">Start Date</label>
