@@ -279,7 +279,7 @@ urlpatterns = [
     
 
     
-    # ****************************Manager******************************
+    # **************************** Manager******************************
 
 
     path('Manager_Dashboard/', training_views.Manager_Dashboard, name='Manager_Dashboard'),
@@ -295,14 +295,14 @@ urlpatterns = [
     path('manager_current_task_list/<int:id>', training_views.manager_current_task_list, name='manager_current_task_list'),
     path('manager_current_task_details/<int:id>', training_views.manager_current_task_details, name='manager_current_task_details'),
     path('manager_previous_team/<int:id>', training_views.manager_previous_team, name='manager_previous_team'),
-    path('Manager_previous_task/', training_views.Manager_previous_task,name='Manager_previous_task'),
-    path('manager_previous_assigned/', training_views.manager_previous_assigned, name='manager_previous_assigned'),
-    path('manager_previous_trainees/', training_views.manager_previous_trainees, name='manager_previous_trainees'),
-    path('manager_previous_empdetails/', training_views.manager_previous_empdetails, name='manager_previous_empdetails'),
-    path('manager_previous_attendance/', training_views.manager_previous_attendance, name='manager_previous_attendance'),
-    path('manager_previous_attendance_list/', training_views.manager_previous_attendance_list, name='manager_previous_attendance_list'),
-    path('manager_previous_task_list/', training_views.manager_previous_task_list, name='manager_previous_task_list'),
-    path('manager_previous_task_details/', training_views.manager_previous_task_details, name='manager_previous_task_details'),
+    path('Manager_previous_task/<int:id>', training_views.Manager_previous_task,name='Manager_previous_task'),
+    path('manager_previous_assigned/<int:id>', training_views.manager_previous_assigned, name='manager_previous_assigned'),
+    path('manager_previous_trainees/<int:id>', training_views.manager_previous_trainees, name='manager_previous_trainees'),
+    path('manager_previous_empdetails/<int:id>', training_views.manager_previous_empdetails, name='manager_previous_empdetails'),
+    path('manager_previous_attendance/<int:id>', training_views.manager_previous_attendance, name='manager_previous_attendance'),
+    path('manager_previous_attendance_list/<int:id>', training_views.manager_previous_attendance_list, name='manager_previous_attendance_list'),
+    path('manager_previous_task_list/<int:id>', training_views.manager_previous_task_list, name='manager_previous_task_list'),
+    path('manager_previous_task_details/<int:id>', training_views.manager_previous_task_details, name='manager_previous_task_details'),
     path('manager_trainee/', training_views.manager_trainee, name='manager_trainee'),
     path('Manager_trainees_details/<int:id>', training_views.Manager_trainees_details, name='Manager_trainees_details'),
     path('Manager_trainees_attendance/<int:id>', training_views.Manager_trainees_attendance, name='Manager_trainees_attendance'),

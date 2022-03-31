@@ -50,7 +50,6 @@
                     </form>
                 </div>
             </div>
-
             <div class="table-responsive">
                 <table class="table table" id="myTable">
                     <thead>
@@ -62,11 +61,10 @@
                     </thead>
                     <tbody>
                         {% if tm %} {% for t in tm %}
-                        <tr data-href="/softwareapp/Manager_previous_task/{{t.id}}">
+                        <tr data-href="{% url 'Manager_previous_task' t.id %}">
                             <td>
                                 {{t.create_team_name}}
                             </td>
-
                             <td style="padding-left:80px;">{{t.create_team_count}}</td>
                             <td>
                                 <div class="progress">
@@ -74,7 +72,6 @@
                                 </div>
                             </td>
                         </tr>
-
                         {% endfor %}{% else %}
                         <h5>Nothing to display...</h5>
                         {% endif %} 
@@ -84,8 +81,6 @@
         </div>
     </div>
 </div>
-
-
 <script>
     function myFunction() {
         var input, filter, table, tr, td, i, txtValue;
@@ -136,7 +131,4 @@
         });
     });
 </script>
-
-
-
 {%endblock%}

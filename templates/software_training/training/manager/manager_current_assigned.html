@@ -1,12 +1,10 @@
 {% extends 'software_training/training/manager/base_manager.html' %}
 {% load static %} {% block content %}
-
 <style>
     table tr[data-href] {
         cursor: pointer;
     }
 </style>
-
 <div class="row ">
     <div class="col-12 grid-margin">
         <div class="card">
@@ -69,8 +67,6 @@
             }
         }
     }
-
-
     $(document).ready(function() {
         $('table tr').click(function() {
             window.location = $(this).data('href');
