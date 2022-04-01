@@ -16,6 +16,7 @@ from django.contrib.auth import authenticate , login , logout
 from django.core.files.storage import FileSystemStorage
 from django.template.loader import get_template
 from xhtml2pdf import pisa
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -1183,7 +1184,8 @@ def manager_newtraineeesteam(request,id):
     else:
         return redirect('/')
 
-def manager_newtrainees_categ(request,id):
+@csrf_exempt
+def manager_newtrainees_categ(request):
     if 'm_id' in request.session:
         if request.session.has_key('m_fullname'):
             m_fullname = request.session['m_fullname']
@@ -1192,13 +1194,11 @@ def manager_newtrainees_categ(request,id):
         else:
             m_fullname = "dummy"
         mem = user_registration.objects.filter(designation_id=m_designation_id).filter(fullname=m_fullname)
-    cou = request.GET.get('cou')
-    cou = request.GET.get('cou')    
-    cour = course.objects.filter(course_category=cou)
-    print(cour)
+    
+    cou = request.GET.get('cou')     
+    cour = course.objects.filter(course_category=cou)   
 
     return render(request, 'software_training/training/manager/manager_newtrainees_categ.html', {'cour': cour})
-
 
 def manager_changepassword(request):
     if 'm_id' in request.session:

@@ -1,6 +1,8 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 <option selected="true" disabled="disabled" value="">Course</option>
 {% for cour in cour %}
 
-<option value="{{ cour.id }}">{{ cour.course_name }}</option>
+<option value="{{cour.id}}">{{ cour.course_name }}</option>
 
 {% endfor %}

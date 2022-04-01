@@ -49,13 +49,10 @@
                   <td>{{memm.enddate}}</td>
                   <td>
                     
-                    <select
-                      class="badge badge-outline-primary bg-dark text-light"
-                      name="team"
+                    <select class="badge badge-outline-primary bg-dark text-light"name="team"
                     >
                     {%for i in team%} 
-                    <option style="display: none">Teams</option>
-                      
+                    <option style="display: none">Teams</option>                   
                       
                      
 
@@ -66,7 +63,7 @@
                   </td>
 
                   <td>
-                    <select class="badge badge-outline-primary bg-dark text-light"name="categ" >
+                    <select class="badge badge-outline-primary bg-dark text-light"name="categ" id="cat">
                       <option style="display: none">Category</option>
                       {%for i in categ%}
 
@@ -76,18 +73,9 @@
                   </td>
 
                   
-                  {% comment %} <td>
+                  <td>
                     <select class="badge badge-outline-primary bg-dark text-light" name="cou" id="cour" >
                       
-                    </select>
-                  </td> {% endcomment %}
-                  <td>
-                    <select class="badge badge-outline-primary bg-dark text-light"name="cou">
-                      <option style="display: none">Course</option>
-                      {%for i in des%}
-
-                      <option value="{{i.id}}">{{i.course_name}}</option>
-                      {%endfor%}
                     </select>
                   </td>
                   <td>
@@ -133,14 +121,16 @@
     }
   }
 </script>
-
-{% comment %} <script type="text/javascript">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
   $("#cat").change(function () {
        // <!-- const url = $("#personForm").attr("data-cities-url"); -->
        const cou = $(this).val();
       console.log(cou,'hai');
       $.ajax({
-           url: '/manager_newtrainees_categ',
+          type: 'get',
+          url: '{% url "manager_newtrainees_categ" %}',
+          //url: 'manager_newtrainees_categ',
            data: {
                'cou': cou
            },
@@ -152,6 +142,6 @@
 
    });
   
-</script> {% endcomment %}
+</script>
 
 {%endblock%}
