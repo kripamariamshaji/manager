@@ -28,54 +28,30 @@
                         <thead>
                             <tr>
                                 <th class="text-white " style="padding-left:36px;">SNo</th>
-                                <th class="text-white">
-                                    Topics
-                                </th>
-                                <th class="text-white">
-                                    Start Date
-                                </th>
-                                <th class="text-white">
-                                    Status
-                                </th>
-
+                                <th class="text-white">Topics</th>
+                                <th class="text-white"> Start Date</th>
+                                <th class="text-white"> Status</th>
                             </tr>
                         </thead>
                         <tbody>
-
                             <br>
+                            {% if mem %}
+                            {% for i in mem %}
                             <tr>
-                                <td style="padding-left:40px;">
-                                    1
-                                </td>
+                                <td style="padding-left:40px;"> {{forloop.counter}}</td>
+                                <td>{{i.topic_topic}}</td>
+                                <td> {{i.topic_startdate|date:"d-m-Y"}}</td>
                                 <td>
-                                    core backend
-                                </td>
-                                <td>
-                                    11-03-2022
-                                </td>
-                                <td>
-
                                     <button type="submit" class="badge badge-outline-primary" data-toggle="modal"
-                                        data-target="#myModal" style="background-color: #191c24;">
-                                        Review</button>
+                                        data-target="#myModal{{i.id}}" style="background-color: #191c24;">
+                                        Review
+                                    </button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="padding-left:40px;">
-                                    2
-                                </td>
-                                <td>
-                                    backend
-                                </td>
-                                <td>
-                                    11-03-2022
-                                </td>
-                                <td>
-                                   <button type="submit" class="badge badge-outline-primary" data-toggle="modal"
-                                        data-target="#myModal" style="background-color: #191c24;">
-                                        Review</button>
-                                </td>
-                            </tr>
+                            {% endfor %}  
+                            {% else %}
+                            <h5 class="text-light">Nothing to display.....</h5>
+                            {% endif %}              
                         </tbody>
                     </table>
                 </div>
@@ -85,7 +61,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal" id="myModal">
+{% for i in mem %}
+<div class="modal" id="myModal{{i.id}}">
     <div class="modal-dialog">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content">
             <!-- Modal Header -->
@@ -96,16 +73,16 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <p class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card">
-                    okkk
+                    {{i.topic_review }}
                 </p>
             </div>
-
             <!-- Modal footer -->
             <div class="modal-footer"></div>
         </div>
     </div>
 </div>
 <!-- modal end -->
+{% endfor %}
 <script>
     function myFunction() {
         var input, filter, table, tr, td, i, txtValue;

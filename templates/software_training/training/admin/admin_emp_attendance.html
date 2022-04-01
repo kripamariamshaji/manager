@@ -13,7 +13,7 @@
                     <br>
                     <br>
                     <form class="forms-sample"
-                          action="/softwareapp/Admin_emp_attendance_show/"
+                          action="{% url 'Admin_emp_attendance_show' c.id %}"
                           method="post">
                         {% csrf_token %}
                         <div class="form-group row">
@@ -32,12 +32,7 @@
                             <label for="exampleInputMobile"
                                    class="col-4 col-sm-4 col-md-4 col-lg-4 col-form-label">End Date</label>
                             <div class="col-8  col-sm-8 col-md-8 col-lg-8">
-                                <input type="date"
-                                       id="txtDate1"
-                                       name="enddate"
-                                       class="form-control text-light"
-                                       id="exampleInputEnddate"
-                                       required>
+                                <input type="date"id="txtDate1"name="enddate"class="form-control text-light"id="exampleInputEnddate"required>
                             </div>
                         </div>
                         <br>

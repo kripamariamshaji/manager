@@ -5,7 +5,6 @@
         cursor: pointer;
     }
 </style>
-
 <div class="row" style="padding-top: 20px;">
     <div class="col-2 col-sm-2 col-md-2 col-lg-2"></div>
     <div class="col-12 col-sm-8 col-md-8 col-lg-8 grid-margin ">
@@ -28,38 +27,31 @@
                         <thead>
                             <tr>
                                 <th class="text-white " style="padding-left:36px;">SNo</th>
-                                <th class="text-white">
-                                    Task
-                                </th>
+                                <th class="text-white"> Task</th>
                                 <th class="text-white">Start Date</th>
                                 <th class="text-white">End Date</th>
-
                             </tr>
                         </thead>
                         <tbody>
                             <br>
-                            <tr data-toggle="modal" data-target="#myModal">
-                                <td style="padding-left:40px;">
-                                    1
-                                </td>
-                                <td>
-                                    coreapp
-                                </td>
-                                <td>
-                                    10-02-2022
-                                </td>
-                                <td>
-                                    11-02-2022
-                                </td>
-
+                            {% if mem %}    
+                            {% for i in mem %}
+                            <tr data-toggle="modal" data-target="#myModal{{i.id}}">
+                                <td style="padding-left:40px;">{{forloop.counter}}</td>
+                                <td>{{i.trainer_task_taskname }}</td>
+                                <td>{{i.trainer_task_startdate|date:"d-m-Y"}}</td>
+                                <td>{{i.trainer_task_enddate|date:"d-m-Y"}}</td>
                             </tr>
-
+                            {% endfor %}
+                            {% else %}
+                            <h5 class="text-light">Nothing to display.....</h5>
+                            {% endif %}
                         </tbody>
                     </table>
+                    <!-- Modal --> 
+                    {% for i in mem %}
 
-                    <!-- Modal -->
-
-                    <div class="modal" id="myModal">
+                    <div class="modal" id="myModal{{i.id}}">
                         <div class="modal-dialog">
                             <div
                                 class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content">
@@ -82,7 +74,7 @@
                                                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 ">
                                                         <h4 class=" mr-2 ml-6 mt-2"
                                                             style="font-size: 15px; font-weight: 100; color:#6C7293;">
-                                                            coreapp frontend</h4>
+                                                            {{i.trainer_task_taskname}}</h4>
 
                                                     </div>
                                                 </div>
@@ -94,7 +86,7 @@
                                                     <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                                                         <h4 class="mr-2 ml-6 mt-2"
                                                             style="font-size: 15px; font-weight: 100;color:#6C7293;">
-                                                            11-02-2022</h4>
+                                                            {{i.trainer_task_enddate|date:"d-m-Y"}}</h4>
                                                     </div>
                                                 </div>
                                                 <div class="row pt-1">
@@ -105,8 +97,7 @@
                                                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 ">
                                                         <h4 class=" mr-2 ml-6 mt-2"
                                                             style="font-size: 15px; font-weight: 100;color:#6C7293;">
-                                                            11-02-2022</h4>
-
+                                                            {{i.trainer_task_submitteddate|date:"d-m-Y"}}</h4>
                                                     </div>
                                                 </div>
                                                 <div class="row pt-1">
@@ -117,11 +108,9 @@
                                                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 ">
                                                         <h4 class=" mr-2 ml-6 mt-2"
                                                             style="font-size: 15px; font-weight: 100;color:#6C7293;">
-                                                            creation</h4>
-
+                                                            {{i.trainer_task_user_description}}</h4>
                                                     </div>
                                                 </div>
-
                                                 <div class="row pt-1 mt-2">
                                                     <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                                                         <div class=" mr-2 ml-3 mt-2" style="color:whitesmoke;">Attached
@@ -129,17 +118,15 @@
                                                     </div>
 
                                                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 ">
-                                                        <a href="{% static '/assets/images/faces/face5.jpg' %}"
+                                                        <a href="{{i.trainer_task_user_files.url}}"
                                                             class="btn btn-outline-primary mdi mdi-format-vertical-align-bottom"
                                                             style="font-size: 15px;overflow: hidden  mr-2 ml-6 mt-2 "
                                                             style="font-size: 15px; font-weight: 100;padding-bottom: 10px;"
                                                             download>Download</a>
                                                     </div>
-
                                                 </div>
                                                 <!-- Modal footer -->
                                                 <div class="modal-footer"></div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -152,6 +139,7 @@
         </div>
     </div>
 </div>
+{% endfor %}
 <!-- modal end -->
 <script>
     function myFunction() {
@@ -161,7 +149,7 @@
         table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
+            td = tr[i].getElementsByTagName("td")[1];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -173,5 +161,4 @@
         }
     }
 </script>
-
 {%endblock%}

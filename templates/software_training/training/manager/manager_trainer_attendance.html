@@ -33,10 +33,9 @@
                             <i class="mdi mdi-account-multiple-plus p-2" ></i>
                             Select Trainer 
                           </option>
-                          {% comment %} {% for i in vars %} {% endcomment %}
+                          {% for i in vars %}
                           <option value="{{i.id}}">{{i.fullname}}</option>
-                          <option value="{{i.id}}">Kripa</option>
-                          {% comment %} {% endfor %} {% endcomment %}
+                          {% endfor %}
                                     </select>
                                 </div>
                             </div>

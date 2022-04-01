@@ -1,5 +1,4 @@
 {% extends 'software_training/training/trainee/base_trainee.html' %} {% load static %} {% block content %}
-
 <div class="row mb-5" style="padding-top: 20px;">
     <div class="col-12 grid-margin">
         <div class="card">
@@ -22,7 +21,6 @@
                     <table class="table" id="myTable">
                         <thead>
                             <tr>
-
                                 <th> Name </th>
                                 <th> To </th>
                                 <th> Message </th>
@@ -30,30 +28,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            {% if mem %}
+                            {% for i in mem %}
+                            <tr>            
                                 <td>
-                                    <span>Henry</span>
+                                    <span><img src="{{i.reported_issue_reporter.photo.url}}" alt="image" /> &nbsp;{{i.reported_issue_reporter.fullname}}</span>
                                 </td>
-                                <td>Manager</td>
-                                <td class="text-wrap text-justify">net issue</td>
+                                <td>{{i.reported_issue_reported_to}}</td>
+                                <td class="text-wrap text-justify">{{i.reported_issue_issue}}</td>
                                 <td>
+                                    {% if i.reported_issue_issuestatus == '0' %}
                                     <div class="badge badge-outline-danger" style="width: 105px;">
                                         <i class="mdi mdi-playlist-remove"></i>&nbsp; Un-Verified
                                     </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span>Anna</span>
-                                </td>
-                                <td>Manager</td>
-                                <td class="text-wrap text-justify">net issue</td>
-                                <td>
-                                    <div class="badge badge-outline-success" data-toggle="modal" data-target="#myModal"
-                                        style="width: 105px;">
-                                        <i class="mdi mdi-playlist-check"></i>&nbsp; Verified
+                                    {% else %}
+                                    <div class="badge badge-outline-success" data-target="#myModal{{i.id}}"  data-toggle="modal" style="width: 105px;">
+                                        <i class="mdi mdi-playlist-remove"></i>&nbsp; Verified
                                     </div>
-                                </td>
+                                    {% endif %}
+                                </td>                           
                             </tr>
+                            {% endfor %} 
+                            {% else %}
+                            <h5 class="text-light">Nothing to display.....</h5>
+                            {% endif %}                  
                         </tbody>
                     </table>
                 </div>
@@ -64,7 +62,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal" id="myModal">
+{% for i in mem %}
+<div class="modal" id="myModal{{i.id}}">
     <div class="modal-dialog">
         <div class="col-12 col-sm-12 col-md-11 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content">
             <!-- Modal Header -->
@@ -77,11 +76,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <p class="col-12 grid-margin stretch-card text-wrap text-justify text-light" style="background-color: dark-grey;width: 400px;
-                    " rows="6">okk</p>
-
+                            <p class="col-12 grid-margin stretch-card text-wrap text-justify text-light" style="background-color: dark-grey;width: 400px;" rows="6">
+                                {{i.reported_issue_reply}}
+                            </p>
                         </div>
-
                     </div>
                 </div>
                 <!-- Modal footer -->
@@ -90,6 +88,7 @@
         </div>
     </div>
 </div>
+{% endfor %}
 <!-- modal end -->
 <script>
     function myFunction() {
@@ -111,7 +110,4 @@
         }
     }
 </script>
-
-
-
 {% endblock %}

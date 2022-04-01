@@ -30,31 +30,36 @@
                                 <th> Password </th>
                                 <th style="padding-left:10px;"> Platform </th>
                                 <th style="padding-left:25px;"> Designation </th>
-                                <th style="padding-left:15px;"> Trainer </th>
                                 <th style="padding-left:15px;"> Date of Appointment </th>
                                 <th style="padding-left:25px;"> Payement </th>
                                 <th style="padding-left:25px;"> Reminder </th>
                             </tr>
                         </thead>
                         <tbody>
+                            {% for t in deta %}
+
                             <tr data-href="#">
                                 <td>
-                                    <img src="{% static 'softwareapp/assets/images/faces/face5.jpg' %}" alt="image" />
-                                    <span class="ps-2">John</span>
+                                    <img src="{{t.photo.url}}" alt="image" />
+                                    <span class="ps-2">{{t.fullname}}</span>
                                 </td>
-                                <td>john@gmail.com</td>
-                                <td style="padding-left:35px;">123</td>
-                                <td>python</td>
-                                <td style="padding-left:35px;">trainee</td>
-                                <td> Software </td>
-                                <td style="padding-left:45px;">25/02/2022 </td>
+                                <td> {{t.email}}</td>
+                                <td style="padding-left:35px;">{{t.password}}</td>
+
+                                <td>{{t.course.course_name}}</td>
+                                <td style="padding-left:35px;">{{t.designation.designation_name}}</td>
+
+                                <td style="padding-left:45px;">{{t.joiningdate|date:"d-m-Y"}} </td>
+
                                 <td>
-                                    <a href="/softwareapp/accounts_payment_detail_list/" class="btn btn-outline-success btn-icon-text">Payement </a>
+                                    <a href="/softwareapp/accounts_payment_detail_list/{{t.id}}" class="btn btn-outline-success btn-icon-text">Payement </a>
                                 </td>
+
                                 <td>
-                                    <a href="#" class="btn btn-outline-danger btn-icon-text">Reminder</a>
+                                    <a href="/softwareapp/reminder/{{t.id}}" class="btn btn-outline-danger btn-icon-text">Reminder </a>
                                 </td>
                             </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

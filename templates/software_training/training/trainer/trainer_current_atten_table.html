@@ -1,19 +1,15 @@
 {%extends 'software_training/training/trainer/base_trainer.html'%} {% load static %} {% block content %}
 
 <style>
-
-
 table tr[data-href] {
     cursor: pointer;
 }
-
 </style>
-
 <div class="row ">
-    <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin">
-      <div class="card">
-        <div class="card-body">
-          <div class="row" >
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
           <div class="col-12 col-sm-12 col-md-12 col-lg-12">
             <h4>Attendance List</h4>
           </div>
@@ -26,141 +22,33 @@ table tr[data-href] {
             </form>
           </div>
         </div>
-
-          <div class="table-responsive">
-            <table class="table" id="myTable">
-              <thead>
-                <tr data-href="#">
-                  
-                  <th> Date </th>
-                  <th> Login Time </th>
-                  <th> Logout Time </th>                 
-                  <th> Status </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr data-href="#">
-                  <td>  04 Dec 2021</td>
-                  <td>  12:45:06 PM</td>
-                  <td>  01:25:10 PM</td>
-                  <td>
-                    <div class="badge badge-outline-success">Present</div>
-                  </td>
-                </tr>
-                <tr data-href="#">
-                  <td>  05 Dec 2021</td>
-                  <td>  ---  </td>
-                  <td>  --- </td>
-                  <td>
-                    <div class="badge badge-outline-danger">Absent</div>
-                  </td>
-                </tr>
-                <tr data-href="#">
-                  <td>  06 Dec 2021</td>
-                  <td>  12:45:06 PM</td>
-                  <td>  01:25:10 PM</td>
-                  <td>
-                    <div class="badge badge-outline-success">Present</div>
-                  </td>
-                </tr>
-                <tr data-href="#">
-                  <td>  07 Dec 2021</td>
-                  <td>  ---  </td>
-                  <td>  --- </td>
-                  <td>
-                    <div class="badge badge-outline-danger">Absent</div>
-                  </td>
-                </tr>
-                <tr data-href="#">
-                  <td>  08 Dec 2021</td>
-                  <td>  12:45:06 PM</td>
-                  <td>  01:25:10 PM</td>
-                  <td>
-                    <div class="badge badge-outline-success">Present</div>
-                  </td>
-                </tr>
-                <tr data-href="#">
-                  <td>  09 Dec 2021</td>
-                  <td>  ---  </td>
-                  <td>  --- </td>
-                  <td>
-                    <div class="badge badge-outline-danger">Absent</div>
-                  </td>
-                </tr>
-                <tr data-href="#">
-                  <td>  10 Dec 2021</td>
-                  <td>  12:45:06 PM</td>
-                  <td>  01:25:10 PM</td>
-                  <td>
-                    <div class="badge badge-outline-success">Present</div>
-                  </td>
-                </tr>
-                <tr data-href="#">
-                  <td>  09 Dec 2021</td>
-                  <td>  ---  </td>
-                  <td>  --- </td>
-                  <td>
-                    <div class="badge badge-outline-danger">Absent</div>
-                  </td>
-                </tr>
-                <tr data-href="#">
-                  <td>  10 Dec 2021</td>
-                  <td>  12:45:06 PM</td>
-                  <td>  01:25:10 PM</td>
-                  <td>
-                    <div class="badge badge-outline-success">Present</div>
-                  </td>
-                </tr>
-                <tr data-href="#">
-                  <td>  09 Dec 2021</td>
-                  <td>  ---  </td>
-                  <td>  --- </td>
-                  <td>
-                    <div class="badge badge-outline-danger">Absent</div>
-                  </td>
-                </tr>
-                <tr data-href="#">
-                  <td>  10 Dec 2021</td>
-                  <td>  12:45:06 PM</td>
-                  <td>  01:25:10 PM</td>
-                  <td>
-                    <div class="badge badge-outline-success">Present</div>
-                  </td>
-                </tr>
-                <tr data-href="#">
-                  <td>  09 Dec 2021</td>
-                  <td>  ---  </td>
-                  <td>  --- </td>
-                  <td>
-                    <div class="badge badge-outline-danger">Absent</div>
-                  </td>
-                </tr>
-                <tr data-href="#">
-                  <td>  10 Dec 2021</td>
-                  <td>  12:45:06 PM</td>
-                  <td>  01:25:10 PM</td>
-                  <td>
-                    <div class="badge badge-outline-success">Present</div>
-                  </td>
-                </tr>
-                <tr data-href="#">
-                  <td>  09 Dec 2021</td>
-                  <td>  ---  </td>
-                  <td>  --- </td>
-                  <td>
-                    <div class="badge badge-outline-danger">Absent</div>
-                  </td>
-                </tr>
-                <tr data-href="#">
-                  <td>  10 Dec 2021</td>
-                  <td>  12:45:06 PM</td>
-                  <td>  01:25:10 PM</td>
-                  <td>
-                    <div class="badge badge-outline-success">Present</div>
-                  </td>
-                </tr>
-
-                
+        <div class="table-responsive">
+          <table class="table" id="myTable">
+            <thead>
+              <tr data-href="#">
+                <th> Date </th>
+                <th> Login Time </th>
+                <th> Logout Time </th>                 
+                <th> Status </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if atten %} {% for i in atten %}
+              <tr data-href="#">
+                <td> {{i.attendance_date|date:"d-m-Y"}}</td>
+                <td></td>
+                <td></td>
+                <td>
+                  {% if i.attendance_status == '1' %}
+                  <div class="badge badge-outline-success">Present</div>
+                  {% else %}
+                  <div class="badge badge-outline-danger">Absent</div>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}{% else %}
+              <h5>Nothing to display...</h5>
+                {% endif %}
               </tbody>
             </table>
           </div>
@@ -168,9 +56,6 @@ table tr[data-href] {
       </div>
     </div>
   </div>
-
-
-
 <script>
   function myFunction() {
     var input, filter, table, tr, td, i, txtValue;
@@ -190,17 +75,11 @@ table tr[data-href] {
       }
     }
   }
-
-
-  $(document).ready(function(){
+$(document).ready(function(){
       $('table tr').click(function(){
           window.location = $(this).data('href');
           return false;
       });
   });
 </script>
-
-
-
-
 {%endblock%}

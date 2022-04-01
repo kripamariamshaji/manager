@@ -27,64 +27,33 @@
                         <thead>
                             <tr>
                                 <th class="text-white " style="padding-left:36px;">SNo</th>
-                                <th class="text-white">
-                                    Topics
-                                </th>
-                                <th class="text-white">
-                                    Start Date
-                                </th>
-                                <th class="text-white">
-                                    End Date
-                                </th>
-                                <th class="text-white">
-                                    Status
-                                </th>
+                                <th class="text-white"> Topics</th>
+                                <th class="text-white"> Start Date </th>
+                                <th class="text-white">  End Date </th>
+                                <th class="text-white">   Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <br>
-
+                            {% if mem %}
+                            {% for i in mem %}
                             <tr>
-                                <td style="padding-left:40px;">
-                                    1
-                                </td>
-                                <td>
-                                    coreapp
-                                </td>
-                                <td>
-                                    12-03-2022
-                                </td>
-                                <td>
-                                    12-03-2022
-                                </td>
+                                <td style="padding-left:40px;">  {{forloop.counter}}</td>
+                                <td>{{i.topic_topic}}  </td>
+                                <td> {{i.topic_startdate|date:"d-m-Y"}}</td>
+                                <td> {{i.topic_enddate|date:"d-m-Y"}}</td>
                                 <td>
                                     <button type="submit" class="badge badge-outline-success" data-toggle="modal"
-                                        data-target="#myModal" style="background-color: #191c24;"><i
+                                        data-target="#myModal{{i.id}}" style="background-color: #191c24;"><i
                                             class="mdi mdi-message-reply-text text-warning"
-                                            style="font-size:18px; "></i> Reply</button>
+                                            style="font-size:18px; "></i> Reply
+                                    </button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="padding-left:40px;">
-                                    2
-                                </td>
-                                <td>
-                                    new app
-                                </td>
-                                <td>
-                                    12-03-2022
-                                </td>
-                                <td>
-                                    12-03-2022
-                                </td>
-                                <td>
-                                    <button type="submit" class="badge badge-outline-success" data-toggle="modal"
-                                        data-target="#myModal" style="background-color: #191c24;"><i
-                                            class="mdi mdi-message-reply-text text-warning"
-                                            style="font-size:18px; "></i> Reply</button>
-                                </td>
-                            </tr>
-
+                            {% endfor %}
+                            {% else %}
+                            <h5 class="text-light">Nothing to display.....</h5>
+                            {% endif %}                            
                         </tbody>
                     </table>
                 </div>
@@ -92,11 +61,9 @@
         </div>
     </div>
 </div>
-
-
 <!-- Modal -->
-
-<div class="modal" id="myModal">
+{% for i in mem %}
+<div class="modal" id="myModal{{i.id}}">
     <div class="modal-dialog">
         <div class="col-12 grid-margin stretch-card bg-dark text-light modal-content">
             <!-- Modal Header -->
@@ -107,7 +74,7 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form method="post" action="#">
+            <form method="post" action="{% url 'save_trainee_review' i.id %}">
                 {% csrf_token %}
                 <div class="modal-body">
                     <textarea class="col-12 grid-margin stretch-card text-light"
@@ -124,9 +91,8 @@
         </div>
     </div>
 </div>
-
+{% endfor %}
 <!-- modal end -->
-
 <script>
     function myFunction() {
         var input, filter, table, tr, td, i, txtValue;

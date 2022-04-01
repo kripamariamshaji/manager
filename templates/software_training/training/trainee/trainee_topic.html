@@ -1,10 +1,8 @@
 {% extends 'software_training/training/trainee/base_trainee.html' %} {% load static %} {% block content %}
-
 <div class="row" style="padding-top:20px;">
     <div class="col-12 col-sm-6 col-md-6 col-lg-6 grid-margin">
-        <a href="/softwareapp/trainee_currentTopic/" style="text-decoration: none">
+        <a href="{% url 'trainee_currentTopic' %}" style="text-decoration: none">
             <div class="card" style="height: 180px">
-
                 <div class="card-body">
                     <div class="row" style="padding-top: 10px">
                         <div class="col-8 col-sm-8 col-md-8 col-lg-8 my-auto">
@@ -21,7 +19,7 @@
         </a>
     </div>
     <div class="col-12 col-sm-6 col-md-6 col-lg-6 grid-margin">
-        <a href="/softwareapp/trainee_previousTopic/" style="text-decoration: none">
+        <a href="{% url 'trainee_previousTopic' %}" style="text-decoration: none">
             <div class="card" style="height: 180px">
                 <div class="card-body">
                     <div class="row" style="padding-top: 10px">
@@ -39,5 +37,4 @@
         </a>
     </div>
 </div>
-
 {% endblock %}

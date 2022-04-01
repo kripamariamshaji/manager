@@ -15,7 +15,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- given task starts here -->
                 <div class="table-responsive">
                     <table class="table" id="myTable">
                         <thead>
@@ -25,42 +24,31 @@
                                 <th>amount</th>
                                 <th>Date</th>
                                 <th style="padding-left: 40px;"> Attached File</th>
-
                             </tr>
                         </thead>
                         <tbody>
+                            {% if mem %}
+                            {% for i in mem %}
                             <tr>
-                                <td>1</td>
-                                <td><img src="{% static '/assets/images/faces/face5.jpg' %}" alt="image" /> &nbsp;Henry
+                                <td>{{forloop.counter}}</td>
+                                <td><img src="{{i.paymentlist_user_id.photo.url}}" alt="image" /> &nbsp;{{i.paymentlist_user_id.fullname}}
                                 </td>
-                                <td> 8000</td>
-                                <td>12-03-2022</td>
+                                <td> {{i.paymentlist_amount_pay}}</td>
+                                <td>{{i.paymentlist_amount_date|date:'d-m-Y'}}</td>
                                 <td>
-
                                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 mt-1">
-                                        <a href="{% static '/assets/images/faces/face5.jpg' %}"
+                                        <a href="{{i.paymentlist_amount_downlod.url}}"
                                             class="btn btn-outline-primary mdi mdi-format-vertical-align-bottom"
                                             style="font-size: 15px;overflow: hidden  mr-2 ml-6 mt-2"
-                                            style="font-size: 15px; font-weight: 100;" download>Download</a>
+                                            style="font-size: 15px; font-weight: 100;" download>Download
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td><img src="{% static '/assets/images/faces/face5.jpg' %}" alt="image" /> &nbsp;Anna
-                                </td>
-                                <td> 3000</td>
-                                <td>12-03-2022</td>
-                                <td>
-
-                                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 mt-1">
-                                        <a href="{% static '/assets/images/faces/face5.jpg' %}"
-                                            class="btn btn-outline-primary mdi mdi-format-vertical-align-bottom"
-                                            style="font-size: 15px;overflow: hidden  mr-2 ml-6 mt-2"
-                                            style="font-size: 15px; font-weight: 100;" download>Download</a>
-                                    </div>
-                                </td>
-                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <h5 class="text-light">Nothing to display.....</h5>
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>
@@ -68,12 +56,6 @@
         </div>
     </div>
 </div>
-<!-- ends here -->
-</div>
-</div>
-</div>
-</div>
-
 <!-- modal end -->
 <script>
     function myFunction() {
@@ -95,5 +77,4 @@
         }
     }
 </script>
-
 {%endblock%}

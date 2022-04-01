@@ -7,17 +7,13 @@
                 <div class="card-body">
                     <center>
                         <h3 class="card-title">PROFILE</h3>
-                        <img src="{% static 'softwareapp/assets/images/faces/face5.jpg' %}"
-                             alt="image"
-                             style="border-radius: 50%;"
-                             width="130"
-                             height="130"/>
+                        <img src="{{mem.photo.url}}" alt="image" style="border-radius: 50%; height:100px; width:100px;" />
                         <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
                             <div class="text-md-center text-xl-left">
                                 <h6 class="mb-1">Joining Date</h6>
                             </div>
                             <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                                <h6 class="text-muted mb-0">25/02/2022</h6>
+                                <h6 class="text-muted mb-0">{{mem.joiningdate|date:"d-m-Y"}}</h6>
                             </div>
                         </div>
                         <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
@@ -25,7 +21,7 @@
                                 <h6 class="mb-1">Designation</h6>
                             </div>
                             <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                                <h6 class="text-muted mb-0">Admin</h6>
+                                <h6 class="text-muted mb-0">{{mem.designation.designation_name}}</h6>
                             </div>
                         </div>
                     </center>
@@ -50,7 +46,7 @@
                                             <h6 class="preview-subject">NAME</h6>
                                         </div>
                                         <div class="me-auto text-sm-right pt-2 pt-sm-0">
-                                            <h6 class="preview-subject">Anandhu</h6>
+                                            <h6 class="preview-subject">{{mem.fullname}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -61,7 +57,7 @@
                                             <h6 class="preview-subject">DEPARTMENT</h6>
                                         </div>
                                         <div class="me-auto text-sm-right pt-2 pt-sm-0">
-                                            <h6 class="preview-subject">Software</h6>
+                                            <h6 class="preview-subject">{{mem.designation.designation_name}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +68,7 @@
                                             <h6 class="preview-subject">EMAIL</h6>
                                         </div>
                                         <div class="me-auto text-sm-right pt-2 pt-sm-0">
-                                            <h6 class="preview-subject">anandhu@gmail.com</h6>
+                                            <h6 class="preview-subject">{{mem.email}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -83,7 +79,7 @@
                                             <h6 class="preview-subject">CONTACT NUMBER</h6>
                                         </div>
                                         <div class="me-auto text-sm-right pt-2 pt-sm-0">
-                                            <h6 class="preview-subject">87645312</h6>
+                                            <h6 class="preview-subject">{{mem.mobile}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -104,7 +100,7 @@
     <div class="row">
         <div class="col-12 col-sm-6 col-md-6 col-lg-6 grid-margin">
             <div class="card">
-                <a href="/softwareapp/Admin_categories/"
+                <a href="{% url 'Admin_categories' %}"
                    style="text-decoration: none;
                           color: white;">
                     <div class="card-body">
@@ -112,7 +108,7 @@
                         <div class="row">
                             <div class="col-8 col-sm-12 col-xl-8 my-auto">
                                 <div class="d-flex d-sm-block d-md-flex align-items-center">
-                                    <h2 class="mb-0">10</h2>
+                                    <h2 class="mb-0">{{c.count}}</h2>
                                 </div>
                             </div>
                             <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
@@ -133,7 +129,7 @@
                         <div class="row">
                             <div class="col-8 col-sm-12 col-xl-8 my-auto">
                                 <div class="d-flex d-sm-block d-md-flex align-items-center">
-                                    <h2 class="mb-0">25</h2>
+                                    <h2 class="mb-0">{{vars.count}}</h2>
                                 </div>
                             </div>
                             <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">

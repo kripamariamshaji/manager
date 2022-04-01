@@ -1,206 +1,160 @@
 {% extends 'software_training/training/admin/base_admin.html' %}
 {% load static %}
 {% block content %}
-    <style>
-    #choose::file-selector-button {
-        background-color: rgb(37, 125, 207);
-        padding: 12px;
-        color: white;
-        width: 100px;
-    }
-    </style>
-    <div class="row mt-5">
-        <div class="col-12 col-sm-1 col-md-2 col-lg-2"></div>
-        <div class="col-12 col-sm-10 col-md-8 col-lg-8 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mt-3" style="text-align:center">Give Task</h4>
-                    <form class="forms-sample"
-                          method="post"
-                          enctype="multipart/form-data"
-                          autocomplete="OFF">
-                        {% csrf_token %}
-                        <div class="row mt-5">
-                            <div class="col-md-12">
-                                <div class="row"></div>
-                                <div class="form-group row">
-                                    <label class="col-12 col-sm-3 col-md-3 col-lg-3 col-form-label mt-1">Select Category</label>
-                                    <div class="col-12 col-sm-8 col-md-8 col-lg-8 ">
-                                        <select class="form-control"
-                                                id="regdetailsdept"
-                                                style="color:white;"
-                                                name="Department"
-                                                required>
-                                            <option selected="true" disabled="disabled" value="">
-                                                Select an option
-                                            </option>
-                                            <option value="">
-                                                Computer Programing
-                                            </option>
-                                            <option value="">
-                                                Computer Graphics
-                                            </option>
-                                            <option value="">
-                                                Caad
-                                            </option>
-                                            <option value="">
-                                                Accounts
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-12 col-sm-3 col-md-3 col-lg-3 col-form-label mt-1">Select Course</label>
-                                    <div class="col-12 col-sm-8 col-md-8 col-lg-8 ">
-                                        <select class="form-control"
-                                                id="regdetailsdept"
-                                                style="color:white;"
-                                                name="Department"
-                                                required>
-                                            <option selected="true" disabled="disabled" value="">
-                                                Select an option
-                                            </option>
-                                            <option value="">
-                                                Python
-                                            </option>
-                                            <option value="">
-                                                Java
-                                            </option>
-                                            <option value="">
-                                                C++
-                                            </option>
-                                            <option value="">
-                                                Php
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-12 col-sm-3 col-md-3 col-lg-3 col-form-label mt-1">Select Designation</label>
-                                    <div class="col-12 col-sm-8 col-md-8 col-lg-8 ">
-                                        <select class="form-control"
-                                                id="regdetailsdept"
-                                                style="color:white;"
-                                                name="Department"
-                                                required>
-                                            <option selected="true" disabled="disabled" value="">
-                                                Select an option
-                                            </option>
-                                            <option value="">
-                                               Manager
-                                            </option>
-                                            <option value="">
-                                               Trainer
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-12 col-sm-3 col-md-3 col-lg-3 col-form-label mt-1">Select Employee</label>
-                                    <div class="col-12 col-sm-8 col-md-8 col-lg-8 ">
-                                        <select class="form-control"
-                                                id="regdetailsdept"
-                                                style="color:white;"
-                                                name="Department"
-                                                required>
-                                            <option selected="true" disabled="disabled" value="">
-                                                Select an option
-                                            </option>
-                                            <option value="">
-                                                abc
-                                            </option>
-                                            <option value="">
-                                                qwe
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+<div class="row mt-5">
+    <div class="col-12 col-sm-1 col-md-2 col-lg-2"></div>
+    <div class="col-12 col-sm-10 col-md-8 col-lg-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mt-3" style="text-align:center">Give Task</h4>
+                <form class="forms-sample" method="post" enctype="multipart/form-data" autocomplete="OFF">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Select Category</label>
+                        <select class="form-control" id="regdetailsdept" style="color:white;" name="Department"
+                            required>
+                            <option selected="true" disabled="disabled" value="">-Not Selected-</option>
+                            {% for i in cate %}
+                            <option value="{{i.id}}">{{i.category_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Course</label>
+                        <select class="form-control" id="regdetailsDesig" style="color:white;" name="designation">
+                            <!-- <option selected="true" disabled="disabled" value="">Select an option</option> -->
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Select Employee</label>
+
+
+                        <select class="form-control" style="color:white;" name="projectname" id="empname">
+                            <!-- {% for i in emp %}
+                              <option value="{{i.fullname}}">{{i.fullname}}</option>
+                               
+
+                                {% endfor %}  -->
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Task</label>
+                        <textarea class="form-control" name="task" id="exampleTextarea1" style="color:white;"
+                            rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Description</label>
+                        <textarea class="form-control" name="discrip" id="exampleTextarea1" style="color:white;"
+                            rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">StartDate</label>
+                        <input type="date" class="form-control txtDate" id="txtDate" name="start" required
+                            style="color: white;">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">End Date</label>
+                        <input type="date" class="form-control txtFrom" id="txtFrom" name="end" required
+                            style="color: white;">
+                    </div>
+                    <div class="form-group">
+                        <label>File upload</label>
+                        <input type="file" name="img[]" class="file-upload-default" required style="color: white;">
+                        <div class="input-group col-xs-12">
+                            <input type="text" class="form-control file-upload-info" disabled
+                                placeholder="select a file">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-primary" type="button"
+                                    style="height: 37px;">Upload</button>
+                            </span>
                         </div>
-                        <div class="form-group row">
-                            <label for="exampleInputEmail2"
-                                   class="col-12 col-sm-3 col-md-3 col-lg-3 col-form-label">Task</label>
-                            <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-                                <input type="text"
-                                       name="projectname"
-                                       class="form-control text-light"
-                                       id="exampleInputUsername1"
-                                       placeholder=""
-                                       required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="exampleInputEmail2"
-                                   class="col-12 col-sm-3 col-md-3 col-lg-3 col-form-label">Description</label>
-                            <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-                                <textarea class="form-control text-light"
-                                          rows="30"
-                                          id=""
-                                          style="height: 100px"
-                                          name="description"
-                                          Required></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12 col-sm-3 col-md-3 col-lg-3">
-                                <label for="exampleInputEmail2" class=" col-form-label">Start Date</label>
-                            </div>
-                            <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-                                <input type="Date"
-                                       class="form-control text-light"
-                                       name="start"
-                                       id="from"
-                                       required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12 col-sm-3 col-md-3 col-lg-3">
-                                <label for="exampleInputMobile" class=" col-form-label">End Date</label>
-                            </div>
-                            <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-                                <input type="Date"
-                                       class="form-control text-light"
-                                       name="end"
-                                       id="to"
-                                       required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="exampleInputConfirmPassword2"
-                                   class="col-5 col-sm-3 col-md-3 col-lg-3 col-form-label">
-                                Attach File
-                            </label
-                            >
-                            <div class="col-12 col-sm-8 col-md-8 col-lg-8 ">
-                                <input type="file"
-                                       name="files"
-                                       class="form-control text-light"
-                                       id="choose"
-                                       required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 col-sm-5 col-md-5"></div>
-                            <div class="col-7 col-sm-5 col-md-7">
-                                <button type="submit"
-                                        class="btn btn-primary btn-icon-text mt-3"
-                                        style="width: 120px;">Assign</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+
+
+
+                    <script>
+                        $(function () {
+                            var dtToday = new Date();
+                            var month = dtToday.getMonth() + 1;
+                            var day = dtToday.getDate();
+                            var year = dtToday.getFullYear();
+                            if (month < 10)
+                                month = '0' + month.toString();
+                            if (day < 10)
+                                day = '0' + day.toString();
+                            var maxDate = year + '-' + month + '-' + day;
+                            $('.txtDate').attr('max', maxDate);
+                        })
+                    </script>
+                    <script>
+                        $(function () {
+                            var dtToday = new Date();
+                            var month = dtToday.getMonth() + 1;
+                            var day = dtToday.getDate();
+                            var year = dtToday.getFullYear();
+                            if (month < 10)
+                                month = '0' + month.toString();
+                            if (day < 10)
+                                day = '0' + day.toString();
+                            var minDate = year + '-' + month + '-' + day;
+                            $('.txtFrom').attr('min', minDate);
+                        })
+                    </script>
+
+
+
+                    <div class="form-check form-check-flat form-check-primary">
+
+                        <button type="submit" class="btn btn-primary me-2">Assign</button>
+
+                </form>
             </div>
         </div>
     </div>
-    
-    <script language="javascript">
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0');
-  var yyyy = today.getFullYear();
+</div>
 
-  today = yyyy + '-' + mm + '-' + dd;
-  $('#from').attr('min',today);
-  $('#to').attr('min',today);
-    </script>
+<script type="text/javascript">
+    $("#regdetailsdept").change(function () {
+        const deptId = $(this).val();
+        $.ajax({
+            url: 'Admin_taskcategory',
+            data: {
+                'dept_id': deptId
+            },
+
+            success: function (data) {
+                $("#regdetailsDesig").html(data);
+                console.log(data);
+            }
+        });
+
+    });
+
+</script>
+
+<script type="text/javascript">
+    $("#regdetailsDesig").change(function () {
+        const deptId = $("#regdetailsdept").val();
+        const desigId = $("#regdetailsDesig").val();
+
+        $.ajax({
+            url: 'BRadmin_taskemployee',
+            data: {
+                'dept_id': deptId,
+                'desig_id': desigId
+            },
+            success: function (data) {
+                $("#empname").html(data);
+                console.log(data);
+            }
+        });
+
+    });
+</script>
+
 {% endblock %}
+
+
+<form class="forms-sample" method="post" action="{% url 'BRadmin_givetask' %}" enctype="multipart/form-data"></form>

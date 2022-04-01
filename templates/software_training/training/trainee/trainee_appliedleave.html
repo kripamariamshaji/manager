@@ -33,45 +33,42 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% if le %}
+                            {% for i in le %}
                             <tr>
                                 <td>
-
-                                    <span>11-03-2022</span>
+                                    <span>{{i.leave_from_date|date:'d-m-Y'}}</span>
                                 </td>
-                                <td>12-03-2022</td>
-                                <td>Personal issue</td>
-                                <td>ok</td>
+                                <td>{{i.leave_to_date|date:'d-m-Y'}}</td>
+                                <td>{{i.leave_reason}}</td>
+                                <td>{{i.leave_rejected_reason}}</td>
 
                                 <td>
-
+                                    {% if i.leave_leaveapproved_status == '0' %}
                                     <div class="badge badge-outline-warning" style="width: 105px;">
                                         <i class="mdi mdi-playlist-remove"></i>&nbsp; Pending
                                     </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span>12-03-2022</span>
-                                </td>
-                                <td>12-03-2022</td>
-                                <td class="text-wrap text-justify" style="width: 550px">Personal issue</td>
-                                <td class="text-wrap text-justify" style="width: 550px">ok</td>
-
-                                <td>
+                                    {% elif i.leave_leaveapproved_status == '1' %}
                                     <div class="badge badge-outline-success" style="width: 105px;">
-                                        <i class="mdi mdi-playlist-check"></i>&nbsp; Approved
+                                        <i class="mdi mdi-playlist-remove"></i>&nbsp; Approved
                                     </div>
-
-                                </td>
+                                    {% else %}
+                                    <div class="badge badge-outline-danger" style="width: 105px;">
+                                        <i class="mdi mdi-playlist-remove"></i>&nbsp; Rejected
+                                    </div>
+                                    {% endif %}
+                                </td>                       
                             </tr>
+                            {% endfor %} 
+                            {% else %}
+                            <h5 class="text-light">Nothing to display.....</h5>
+                            {% endif %}                     
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
-
 <script>
     function myFunction() {
         var input, filter, table, tr, td, i, txtValue;
@@ -92,5 +89,4 @@
         }
     }
 </script>
-
 {% endblock %}

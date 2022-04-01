@@ -2,9 +2,8 @@
 
 <div class="row" style="padding-top:20px;">
     <div class="col-12 col-sm-6 col-md-6 col-lg-6 grid-margin">
-        <a href="/softwareapp/trainee_payment_addpayment/" style="text-decoration: none">
+        <a href="{% url 'trainee_payment_addpayment' %}" style="text-decoration: none">
             <div class="card" style="height: 180px">
-
                 <div class="card-body">
                     <div class="row" style="padding-top: 10px">
                         <div class="col-8 col-sm-8 col-md-8 col-lg-8 my-auto">
@@ -20,9 +19,8 @@
             </div>
         </a>
     </div>
-
     <div class="col-12 col-sm-6 col-md-6 col-lg-6 grid-margin">
-        <a href="/softwareapp/trainee_payment_viewpayment/" style="text-decoration: none">
+        <a href="{% url 'trainee_payment_viewpayment' %}" style="text-decoration: none">
             <div class="card" style="height: 180px">
                 <div class="card-body">
                     <div class="row" style="padding-top: 10px">
@@ -40,5 +38,4 @@
         </a>
     </div>
 </div>
-
 {% endblock %}

@@ -23,39 +23,30 @@
                         </div>
                     </form>
                 </div>
-
                 <div class="table-responsive">
                     <table class="table" id="myTable">
                         <thead>
                             <tr data-href="#">
                                 <th class="text-white " style="padding-left:36px;">SNo</th>
-                                <th class="text-white">
-                                    Task
-                                </th>
-                                <th class="text-white">
-                                    Start Date
-                                </th>
-                                <th class="text-white">
-                                    End Date
-                                </th>
+                                <th class="text-white">Task</th>
+                                <th class="text-white"> Start Date</th>
+                                <th class="text-white">End Date</th>
                             </tr>
                         </thead>
                         <tbody>
                             <br>
-                            <tr data-href="/softwareapp/trainee_task_details/">
-                                <td style="padding-left:40px;">
-                                    1
-                                </td>
-                                <td>
-                                    coreapp frontend
-                                </td>
-                                <td>
-                                    14-03-2022
-                                </td>
-                                <td>
-                                    15-03-2022
-                                </td>
+                            {% if mem %}
+                            {% for i in mem %}
+                            <tr data-href="{% url 'trainee_task_details' i.id %}">
+                                <td style="padding-left:40px;">{{forloop.counter}}</td>
+                                <td>{{i.trainer_task_taskname }}</td>
+                                <td>{{i.trainer_task_startdate|date:'d-m-Y'}}</td>
+                                <td>{{i.trainer_task_enddate|date:'d-m-Y'}}</td>
                             </tr>
+                            {% endfor %}
+                            {% else %}
+                            <h5 class="text-light">Nothing to display.....</h5>
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>
@@ -64,7 +55,6 @@
     </div>
 </div>
 </div>
-
 <script>
     function myFunction() {
         var input, filter, table, tr, td, i, txtValue;
@@ -73,7 +63,7 @@
         table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
+            td = tr[i].getElementsByTagName("td")[1];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {

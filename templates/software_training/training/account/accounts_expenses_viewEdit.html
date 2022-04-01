@@ -7,8 +7,8 @@
                 <div class="card-body">
                     <div class="row">
                         <h5>EXPENSES</h5>
-                        <div class="h-divider"></div><br><br>
-                        <form action="/softwareapp/accounts_expenses_viewEdit_Update/" method="post" autocomplete="off">
+                        <div class="h-divider"></div><br><br> {% for i in var %}
+                        <form action="{% url 'accounts_expenses_viewEdit_Update' i.id %}" method="post" autocomplete="off">
                             {% csrf_token %}
                             <div class="row">
                                 <input type="hidden" class="form-control" name="team_id" value="">
@@ -16,14 +16,14 @@
                                     <label class="text-muted" style="padding-left:4px ;padding-top:10px;width: 80px;"> PAYEE </label>
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-                                    <input type="text" class="form-control text-light" name="payee" value="{{i.payee}}">
+                                    <input type="text" class="form-control text-light" name="payee" value="{{i.acntexpensest_payee}}">
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                                     <label class="text-muted" style="padding-left:4px ;padding-top:10px;width:200px;">PAYMENT
                                             ACCOUNT</label>
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-3 col-lg-3 ">
-                                    <input type="text" class="form-control text-light" style="width: 100%" name="payacnt" value="{{i.payacnt}}">
+                                    <input type="text" class="form-control text-light" style="width: 100%" name="payacnt" value="{{i.acntexpensest_payacnt}}">
                                 </div><br><br>
                             </div>
                             <div class="row">
@@ -32,14 +32,14 @@
                                             DATE</label>
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-                                    <input type="date" class="form-control text-light" name="paydt" id="date" value="{{i.paydate}}">
+                                    <input type="date" class="form-control text-light" name="paydt" id="date" value="{{i.acntexpensest_paydate}}">
                                 </div><br><br>
                                 <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                                     <label class="text-muted" style="padding-left:4px ;padding-top:10px;width:200px;">PAYMENT
                                             MODE</label>
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-                                    <input type="text" class="form-control text-light" style="width: 100%" name="paymod" value="{{i.paymethod}}">
+                                    <input type="text" class="form-control text-light" style="width: 100%" name="paymod" value="{{i.acntexpensest_paymethod}}">
                                 </div><br><br>
                             </div>
                             <div class="row">
@@ -47,7 +47,7 @@
                                     <label class="text-muted" style="padding-left:4px ;padding-top:10px; width:110px;">REF NO</label>
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-                                    <input type="text" class="form-control text-light" name="ref" style="width:100%;" value="{{i.refno}}"><br><br>
+                                    <input type="text" class="form-control text-light" name="ref" style="width:100%;" value="{{i.acntexpensest_refno}}"><br><br>
                                 </div>
                             </div>
                             <div class="h-divider"></div>
@@ -66,10 +66,10 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><input type="text" class="form-control text-light" name="category" value="{{i.category}}"></td>
-                                                    <td><input type="text" class="form-control text-light" name="description" value="{{i.description}} "></td>
-                                                    <td><input type="text" class="form-control text-light" name="amount" id="amount" value="{{i.amount}}"></td>
-                                                    <td><input type="text" class="form-control text-light" name="tax" style="width: 100%;" id="tax" value="{{i.tax}}"></td>
+                                                    <td><input type="text" class="form-control text-light" name="category" value="{{i.acntexpensest_category}}"></td>
+                                                    <td><input type="text" class="form-control text-light" name="description" value="{{i.acntexpensest_description}} "></td>
+                                                    <td><input type="text" class="form-control text-light" name="amount" id="amount" value="{{i.acntexpensest_amount}}"></td>
+                                                    <td><input type="text" class="form-control text-light" name="tax" style="width: 100%;" id="tax" value="{{i.acntexpensest_tax}}"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -81,7 +81,7 @@
                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3"></div>
                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3"></div>
                                 <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                                    <input type="hidden" id="total" name="total" value="{{i.total}}">
+                                    <input type="hidden" id="total" name="total" value="{{i.acntexpensest_total}}">
                                     <button type="submit" class="btn btn-primary w-100 mt-4">Save</button>
                                 </div>
                             </div>
@@ -91,6 +91,7 @@
             </div>
         </div>
     </div>
+    {% endfor %}
 </div>
 
 <script>

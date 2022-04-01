@@ -7,7 +7,6 @@ class create_team(models.Model):
     create_team_name = models.CharField(max_length=200)
     create_team_trainer = models.CharField(max_length=200, default='')
     create_team_progress = models.IntegerField()
-    create_team_count = models.IntegerField(default=0)
     create_team_status = models.CharField(max_length=200, default='0')
 
 
@@ -112,8 +111,6 @@ class user_registration(models.Model):
     def avg(self):
         return (self.attitude+self.creativity+self.workperformance)/3
 
-
-
 class attendance(models.Model):
     attendance_user = models.ForeignKey(user_registration, on_delete=models.SET_NULL,
                              related_name='attendanceuser', null=True, blank=True)
@@ -123,7 +120,6 @@ class attendance(models.Model):
    
     def __str__(self):
         return self.user
-
 
 class trainer_task(models.Model):
     trainer_task_user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING,
@@ -148,12 +144,8 @@ class trainer_task(models.Model):
     trainer_task_user_description = models.TextField(max_length=240)
     trainer_task_user_files = models.FileField(upload_to='images/', null=True, blank=True)
     trainer_task_status = models.CharField(max_length=200)
-    
-
     def __str__(self):
         return self.user
-
-
 
 class leave(models.Model):
     leave_user = models.ForeignKey(user_registration, on_delete=models.SET_NULL,
@@ -191,13 +183,6 @@ class topic(models.Model):
     topic_review = models.TextField()
     topic_status = models.CharField(max_length=200)
 
-
-    
-    
-
-
-
-
 class paymentlist(models.Model):
     paymentlist_user_id = models.ForeignKey(user_registration, on_delete=models.SET_NULL, related_name='userpay',null=True,blank=True)
     paymentlist_amount_pay = models.IntegerField(default='0')
@@ -212,24 +197,19 @@ class paymentlist(models.Model):
     def balance(self):
         return (self.course.total_fee-self.amount_pay)
 
-
-
 class reported_issue(models.Model):
     reported_issue_reporter = models.ForeignKey(user_registration, on_delete=models.SET_NULL,related_name='reported_issuereporter', null=True, blank=True)
     reported_issue_reported_to = models.ForeignKey(user_registration, on_delete=models.SET_NULL,related_name='reported_issuereported_to', null=True, blank=True)
     reported_issue_issue = models.TextField()
     reported_issue_reported_date = models.DateField(auto_now_add=False, auto_now=False,  null=True, blank=True)
     reported_issue_reply = models.TextField()
-    reported_issue_status = models.CharField(max_length=200)
     reported_issue_issuestatus = models.CharField(max_length=200)
     reported_issue_designation_id = models.ForeignKey(designation, on_delete=models.SET_NULL,related_name='reportissuedesignation', null=True, blank=True)
 
     def __str__(self):
         return self.reporter
 
-
 class acntspayslip(models.Model):
-
     acntspayslip_basic_salary = models.IntegerField()
     acntspayslip_user_id = models.ForeignKey(user_registration, on_delete=models.SET_NULL, related_name='user',null=True,blank=True)
     acntspayslip_designation = models.ForeignKey(designation, on_delete=models.SET_NULL, related_name='desic',null=True,blank=True)
@@ -255,9 +235,9 @@ class acntspayslip(models.Model):
     acntspayslip_instype = models.CharField(max_length=255,default='')
     acntspayslip_deltype = models.CharField(max_length=255,default='')
     acntspayslip_leatype = models.CharField(max_length=255,default='')
+    acntspayslip_pftype = models.CharField(max_length=255,default='')
+    acntspayslip_esitype = models.CharField(max_length=255,default='')
     
-
-
 class acntexpensest (models.Model):
     acntexpensest_payee =models.CharField(max_length=100)
     acntexpensest_payacnt=models.CharField(max_length=200)

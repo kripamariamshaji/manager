@@ -20,7 +20,6 @@
                 <div class="table-responsive">
                     <table class="table " id="myTables">
                         <thead>
-
                             <tr>
                                 <th>Date</th>
                                 <th>Login Time</th>
@@ -29,80 +28,24 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            {% if atten %}
+                            {% for i in atten %}
                             <tr>
-                                <td>04 Dec 2019</td>
-                                <td>11:30:05 AM</td>
-                                <td>12:30:05 AM</td>
-
+                                <td>{{i.attendance_date|date:"d-m-Y"}}</td>
+                                <td></td>
+                                <td></td>
                                 <td>
+                                    {% if i.attendance_status == '0' %}
                                     <div class="badge badge-outline-success">Present</div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>04 Dec 2019</td>
-                                <td>---</td>
-                                <td>---</td>
-
-                                <td>
+                                    {% else %}
                                     <div class="badge badge-outline-danger">Absent</div>
+                                    {% endif %}
                                 </td>
                             </tr>
-
-
-                            <tr>
-                                <td>15 Dec 2019</td>
-                                <td>11:30:05 AM</td>
-                                <td>12:30:05 AM</td>
-
-                                <td>
-                                    <div class="badge badge-outline-success">Present</div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>04 Dec 2019</td>
-                                <td>---</td>
-                                <td>---</td>
-
-                                <td>
-                                    <div class="badge badge-outline-danger">Absent</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>16 Dec 2019</td>
-                                <td>11:30:05 AM</td>
-                                <td>12:30:05 AM</td>
-                                <td>
-                                    <div class="badge badge-outline-success">Present</div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>04 Dec 2019</td>
-                                <td>---</td>
-                                <td>---</td>
-                                <td>
-                                    <div class="badge badge-outline-danger">Absent</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>04 Dec 2019</td>
-                                <td>11:30:05 AM</td>
-                                <td>12:30:05 AM</td>
-                                <td>
-                                    <div class="badge badge-outline-success">Present</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>04 Dec 2019</td>
-                                <td>---</td>
-                                <td>---</td>
-                                <td>
-                                    <div class="badge badge-outline-danger">Absent</div>
-                                </td>
-                            </tr>
+                            {% endfor %}       
+                            {% else %}
+                            <h5 class="text-light">Nothing to display.....</h5>
+                            {% endif %}                       
                         </tbody>
                     </table>
                 </div>
@@ -130,5 +73,4 @@
         }
     }
 </script>
-
 {%endblock%}

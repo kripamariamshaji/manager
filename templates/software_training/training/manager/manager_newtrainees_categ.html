@@ -1,0 +1,6 @@
+<option selected="true" disabled="disabled" value="">Course</option>
+{% for cour in cour %}
+
+<option value="{{ cour.id }}">{{ cour.course_name }}</option>
+
+{% endfor %}

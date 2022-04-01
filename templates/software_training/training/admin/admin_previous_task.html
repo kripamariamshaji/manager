@@ -33,24 +33,25 @@
                                         </tr>
                                     </thead>
                                     <tbody id="myTable">
+                                        {% for i in c %}
                                         <tr>
-                                            <td>Kerala Tourism</td>
-                                            <td>06-03-2022</td>
-                                            <td>09-03-2022</td>
+                                            <td>{{i.trainer_task_taskname}}</td>
+                                            <td>{{i.trainer_task_startdate}}</td>
+                                            <td>{{i.trainer_task_enddate}}</td>
                                             <td>done</td>
                                             <td>
+                                                {% if i.trainer_task_status == '1' %}
+                                        
                                                 <div class="badge badge-outline-success">Completed</div>
+        
+                                                {%else %}
+        
+                                                <div class="badge badge-outline-warning">Processing</div>
+                                                
+                                                {% endif %}
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Online shopping</td>
-                                            <td>06-03-2022</td>
-                                            <td>09-03-2022</td>
-                                            <td>done</td>
-                                            <td>
-                                                <div class="badge badge-outline-success">Completed</div>
-                                            </td>
-                                        </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>

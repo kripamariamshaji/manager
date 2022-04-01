@@ -21,43 +21,28 @@
                         <thead>
                             <tr data-href="#">
                                 <th>SlNo</th>
-                                <th>Name</th>
+                                <th>Name</th>{% for use in use %} {% if use.designation.designation_name == 'trainer' %}
+                                <th>Course</th>{% endif %}{% endfor %}
                                 <th>Join Date</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr data-href="/softwareapp/accounts_payment_details/">
-                                <td>1</td>
+                        <tbody>{% if use %} {% for i in use %}
+                            <tr data-href="{% url 'account_payment_details' i.id %}">
+                                <td>{{ forloop.counter }}</td>
                                 <td>
-                                    <img src="{% static 'softwareapp/assets/images/faces/face5.jpg' %}" class="img-fluid rounded-circle mb-3 " alt="image" style="margin-right:20px">
-                                    <span class="ps-2">John Smith</span></a>
-                                </td>
-                                <td>25/02/2021</td>
-                                <td>2/03/2022</td>
-                                <td>15/03/2022</td>
+                                    <img src="{{i.photo.url}}" class="img-fluid rounded-circle mb-1 " alt="image">
+                                    <span class="ps-1">{{i.fullname}}</span></a>
+                                </td>{% if i.designation.designation_name == 'trainer' %}
+                                <td>{{i.course.course_name}}</td>{% endif %}
+                                <td>{{i.joiningdate}}</td>
+                                <td>{{i.startdate}}</td>
+                                <td>{{i.enddate}}</td>
                             </tr>
-                            <tr data-href="/softwareapp/accounts_payment_details/">
-                                <td>2</td>
-                                <td>
-                                    <img src="{% static 'softwareapp/assets/images/faces/face5.jpg' %}" class="img-fluid rounded-circle mb-3 " alt="image" style="margin-right:20px">
-                                    <span class="ps-2">John Smith</span></a>
-                                </td>
-                                <td>25/02/2021</td>
-                                <td>2/03/2022</td>
-                                <td>15/03/2022</td>
-                            </tr>
-                            <tr data-href="/softwareapp/accounts_payment_details/">
-                                <td>3</td>
-                                <td>
-                                    <img src="{% static 'softwareapp/assets/images/faces/face5.jpg' %}" class="img-fluid rounded-circle mb-3 " alt="image" style="margin-right:20px">
-                                    <span class="ps-2">John Smith</span></a>
-                                </td>
-                                <td>25/02/2021</td>
-                                <td>2/03/2022</td>
-                                <td>15/03/2022</td>
-                            </tr>
+                            {% endfor %} {% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>
@@ -74,7 +59,7 @@
         table = document.getElementById("myTables");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
+            td = tr[i].getElementsByTagName("td")[1];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
